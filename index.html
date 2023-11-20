@@ -4,15 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livros</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <img src="" alt="">
-
-        </div>
+    <div class="container" id="linguagens-container">
+     <!--   <div class="card">
+            <img src="img/java-usando-a-cabeca.webp" alt="">
+            <h3>Among Us</h3>
+        </div>-->
     </div>
-   
-    <script src="lerlivros.js"></script>
+   <script>
+    function carregar() {
+        fetch('http://localhost:8080/linguagens')
+        .then(response => response.json())
+        .then(linguagens => {
+            const container = document.querySelector("#linguagens-container")
+
+            linguagens.map(linguagem => {
+                const card = document.createElement("div")
+                card.classList.add("card")
+
+                const img = document.createElement("img");
+                img.src = linguagem.pathFoto
+                img.alt = linguagem.titulo
+
+                const titulo = document.createElement("h3")
+                titulo.textContent = linguagem.titulo
+
+                card.appendChild(img)
+                card.appendChild(titulo)
+                container.appendChild(card)
+            })
+        })
+    }
+
+    carregar()
+   </script>
+    
 </body>
 </html>
